@@ -11,7 +11,6 @@ import json
 import math
 
 
-#------------以下是2023.4.7以后编写的新的想法-----------------------
 class DataLoad(Dataset):
     def __init__(self, path):
         with open(path, encoding='utf8') as f1:
@@ -31,7 +30,7 @@ class DataLoad(Dataset):
         return len(self.py_list)
 
 
-
+'''
 class featureload(Dataset):
     '''
     set:'huawei'/'digital'
@@ -78,7 +77,7 @@ class featureload(Dataset):
             data,tar=self.pretreat(data,pen)
             return data,tar,pen,press,speed
 
-    def featurepro(self,data):#时域转化为频域并bins合并处理，这里应该不用考虑采样率什么的
+    def featurepro(self,data):#时域转化为频域并bins合并处理
         fft=FFT(self.samplerate)
         #data = pd.DataFrame(fft.fft(data[2]))#仅看z轴的频域
         data=fft.fft321(data)
@@ -124,7 +123,7 @@ class dataloadProduct():
         return self.set.getItem(idx,self.settype)
 
 
-#可以返回三元组的类
+
 class HuaweiTripletParent():
     def __init__(self,path):
         self.path = path;
@@ -185,7 +184,7 @@ class HuaweiTripletParent():
             return 1.12
         elif (g == '200'):
             return 1.4
-#任选压力和速度
+
 class HuaweiTriplet(HuaweiTripletParent):
     l_pressure = ['A-0-P-150']  # ,'A-0-P-150','A-0-P-200'
     l_speed = ['S80','S100','S120']  # 'S60','S80','S100',,'S120','S140'
@@ -333,7 +332,7 @@ class DigitalAllFV(DigitalParent):
 class readtxt():
     def __init__(self,path):
         self.path=path;
-    def getTrainPaper(self):#以列表形式返回训练集中的每种纸笔
+    def getTrainPaper(self):
         f=open(self.path,encoding='gbk');
         data=f.readline().strip("训练集：").strip('\n').split("，");
         return data
@@ -373,7 +372,7 @@ if __name__ == '__main__':
     print(len(l_train))
     for i, item in enumerate(test_data):
         l_test.append(item)
-        if ((i + 1) % nums == 0):  # 每50个数据样本存成一个文件oj
+        if ((i + 1) % nums == 0):  # 每50个数据样本存成一个文件
             with open(savepath + 'test_ireader_add{}.json'.format((i + 1) // nums + 1), 'w', encoding='utf8') as f2:
                 j_str = json.dump(l_test, f2, ensure_ascii=False, indent=2)
             l_test = []
@@ -386,7 +385,7 @@ if __name__ == '__main__':
     #     # 加载文件的对象
     #     py_list = json.load(f1)
     #     print(len(py_list[0]["r_feature"]))
-
+'''
 
 
 
