@@ -1,0 +1,3 @@
+训练集：A4纸10-中性笔，A4纸10-铅笔HB，A4纸10-圆珠笔，A4纸10-马克笔
+测试集：iReader Smart X，苹果Pencil，微软surface，华为Pencil-透明笔尖
+全部数据：素描纸10-铅笔HB，苹果Pencil，A4纸10-圆珠笔，iReader Smart X，素描纸10-圆珠笔，素描纸10-中性笔，A4纸10-马克笔，华为Pencil-透明笔尖
