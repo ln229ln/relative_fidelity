@@ -69,7 +69,7 @@ class featureload(Dataset):
             r_data= self.pretreat(data['r_data'])
             p2_data= self.pretreat(data['p2_data'])
             #直接根据主观实验得到概率
-            # return [p1_data,r_data,p2_data],label,pen,press,speed#这里的pen是字典
+            # return [p1_data,r_data,p2_data],label,pen,press,speed#
             res={"p1_feature":p1_data.tolist(),"r_feature":r_data.tolist(),"p2_feature":p2_data.tolist(),"label":label.item(),"pressure":press.tolist(),"speed":speed.tolist(),"refer":pen["refer"],"pen1":pen["pen1"],"pen2":pen['pen2']}
 
             return res
@@ -83,13 +83,13 @@ class featureload(Dataset):
         data=fft.fft321(data)
         data=bins(data,head=10,tail=500,reso=2)
         return data
-    def pretreat(self,data):#对加速度数据进行预处理并返回feature，并根据pen类型返回对应的坐标label
+    def pretreat(self,data):#对加速度数据进行预处理并返回feature，根据pen类型返回对应的坐标label
         if (self.datatype == 'F'):
             if(self.allfv):
                 data=(data.apply(lambda x:bins(x,head=10,tail=500,reso=2).iloc[:,0],axis=1))
             else:
                 data = self.featurepro(data).T  # 时域变频域并处理
-        data = torch.tensor(data.values,dtype=torch.float32)  # 变成tensor类型,sequence*feature
+        data = torch.tensor(data.values,dtype=torch.float32)  # 变tensor类型,sequence*feature
         # 归一化
         # data=data/data.max()
         return data
@@ -343,7 +343,6 @@ class readtxt():
         return data
 
 if __name__ == '__main__':
-    # path = r"D:\数据\20220722数据采集\20220722数据采集"  # /root/autodl-tmp/data/20220722数据采集
     path=r'D:\数据\20220722数据采集\HapticDFT321_F\FiveRepeat'#所有速度和压力
     savepath = r'G:\Project\PycharmProjects\相对拟真度评测2024.2.1\Data\\'
     print(os.getcwd())
