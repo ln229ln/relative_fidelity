@@ -31,19 +31,8 @@ def butter(signal_source, fs):
     filtered = signal.sosfilt(sos, signal_source)
     return filtered
 
-def weibo(fredata,head=15,tail=700,q=1.1):#输入输出数据类型都是dataframe
-    start=head
-    bin=0
-    bins=[]
-    while start<tail:
-        end = int(q * start)
-        for i in range(start,min(end,tail)):
-            bin+=fredata.iloc[i]#fredata是Series类型
-        start=end
-        bins.append(bin)
-        bin=0
-    return pd.DataFrame(bins)
-def bins(fredata,head=15,tail=700,reso=1):
+
+def bins(fredata,head=15,tail=500,reso=1):
     start = head
     bin = 0
     bins = []
